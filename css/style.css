@@ -539,6 +539,13 @@ i.fa{
     text-decoration: underline;
 }
 
+.text-center {
+    text-align: center !important;
+}
+.text-danger {
+    color: #e74c3c !important;
+}
+
 /* ===================== */
 /* FrontEnd CSS END */
 /* ===================== */
