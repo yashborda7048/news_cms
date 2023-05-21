@@ -1,4 +1,7 @@
-<?php include "header.php"; ?>
+<?php include "header.php";
+if ($_SESSION['user_role'] == '0') {
+    header('Location: ' . $hostname . 'admin/post.php');
+} ?>
 <div id="admin-content">
     <div class="container">
         <div class="row">
@@ -18,55 +21,65 @@
                         <th>Delete</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class='id'>1</td>
-                            <td>Html</td>
-                            <td>5</td>
-                            <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-                            <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class='id'>2</td>
-                            <td>Css</td>
-                            <td>15</td>
-                            <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-                            <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class='id'>3</td>
-                            <td>Java</td>
-                            <td>8</td>
-                            <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-                            <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class='id'>4</td>
-                            <td>Php</td>
-                            <td>11</td>
-                            <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-                            <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class='id'>5</td>
-                            <td>Python</td>
-                            <td>13</td>
-                            <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-                            <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class='id'>6</td>
-                            <td>Scss</td>
-                            <td>3</td>
-                            <td class='edit'><a href='update-category.php'><i class='fa fa-edit'></i></a></td>
-                            <td class='delete'><a href='delete-category.php'><i class='fa fa-trash-o'></i></a></td>
-                        </tr>
+                        <?php
+                        include 'helper/config.php';
+                        $limit = 3;
+                        $page = $_GET['page'];
+                        $offset = ($page - 1) * $limit;
+                        // SQL Query Enter for Table Data
+                        $sql = "SELECT * FROM category ORDER BY category.category_id ASC LIMIT {$offset},{$limit}";
+                        $result = mysqli_query($conn, $sql) or die('Query Unsuccessful.');
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                <tr>
+                                    <td class='id'>
+                                        <?php echo $row['category_id'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['category_name'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['post'] ?>
+                                    </td>
+                                    <td class='edit'><a href='update-category.php?id=<?php echo $row['category_id'] ?>'><i
+                                                class='fa fa-edit'></i></a></td>
+                                    <td class='delete'><a href='delete-category.php?id=<?php echo $row['category_id'] ?>'><i
+                                                class='fa fa-trash-o text-danger'></i></a></td>
+                                </tr>
+                            <?php }
+                        } else {
+                            echo "<tr>
+                                <td colspan='5' class='text-center'>
+                                <h3>Add Data</h3>
+                                </td> 
+                                </tr>";
+                        } ?>
                     </tbody>
                 </table>
-                <ul class='pagination admin-pagination'>
-                    <li class="active"><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                </ul>
+                <?php
+                $sql_1 = "SELECT * FROM category";
+                $result_1 = mysqli_query($conn, $sql_1) or die("Query Failed.");
+                if (mysqli_num_rows($result_1) > 0) {
+                    $total_records = mysqli_num_rows($result_1);
+                    $total_page = ceil($total_records / $limit);
+                    echo "<ul class='pagination admin-pagination'>";
+                    if ($page > 1) {
+                        echo "<li><a href='category.php?page=" . ($page - 1) . "'>Prev</a></li>";
+                    }
+                    for ($i = 1; $i <= $total_page; $i++) {
+                        if ($i == $page) {
+                            $active = 'active';
+                        } else {
+                            $active = '';
+                        }
+                        echo "<li class='{$active}'><a href='category.php?page={$i}'>{$i}</a></li>";
+                    }
+                    if ($total_page > $page) {
+                        echo "<li><a href='category.php?page=" . ($page + 1) . "'>Next</a></li>";
+                    }
+                    echo "</ul>";
+                } ?>
             </div>
         </div>
     </div>

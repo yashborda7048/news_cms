@@ -1,4 +1,7 @@
 <?php include "header.php";
+if ($_SESSION['user_role'] == '0') { 
+    header('Location: ' . $hostname . 'admin/post.php');
+}
 if (isset($_POST['submit'])) {
     include 'helper/config.php';
 
@@ -9,13 +12,13 @@ if (isset($_POST['submit'])) {
     $role = mysqli_real_escape_string($conn, $_POST['role']);
 
     $sql_1 = "UPDATE `user` SET 
-        `first_name` = '{$fname}',
-        `last_name` = '{$lname}',
-        `username` = '{$user}',
-        `role` = '{$role}'
-        WHERE `user`.`user_id` = {$uid}";
+                `first_name` = '{$fname}',
+                `last_name` = '{$lname}',
+                `username` = '{$user}',
+                `role` = '{$role}'
+                WHERE `user`.`user_id` = {$uid}";
     if (mysqli_query($conn, $sql_1)) {
-        header('Location: ' . $hostname . 'admin/users.php');
+        header('Location: ' . $hostname . 'admin/users.php?page=1');
         mysqli_close($conn);
     } else {
         echo 'Query Unsuccessful.';

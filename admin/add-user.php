@@ -1,4 +1,7 @@
 <?php include "header.php";
+if ($_SESSION['user_role'] == '0') {
+    header('Location: ' . $hostname . 'admin/post.php');
+}
 if (isset($_POST['save'])) {
     include 'helper/config.php';
 
@@ -16,7 +19,7 @@ if (isset($_POST['save'])) {
         $sql_1 = "INSERT INTO `user`(`first_name`, `last_name`, `username`, `password`, `role`) 
                     VALUES ('{$fname}','{$lname}','{$user}','{$password}', '{$role}')";
         if (mysqli_query($conn, $sql_1)) {
-            header('Location: ' . $hostname . 'admin/users.php');
+            header('Location: ' . $hostname . 'admin/users.php?page=1');
         } else {
             echo 'Query Failed.';
         }
