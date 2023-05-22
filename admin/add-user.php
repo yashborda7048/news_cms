@@ -19,7 +19,7 @@ if (isset($_POST['save'])) {
         $sql_1 = "INSERT INTO `user`(`first_name`, `last_name`, `username`, `password`, `role`) 
                     VALUES ('{$fname}','{$lname}','{$user}','{$password}', '{$role}')";
         if (mysqli_query($conn, $sql_1)) {
-            header('Location: ' . $hostname . 'admin/users.php?page=1');
+            header('Location: ' . $hostname . 'admin/users.php');
         } else {
             echo 'Query Failed.';
         }

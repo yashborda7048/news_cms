@@ -23,8 +23,8 @@ if ($_SESSION['user_role'] == '0') {
                     <tbody>
                         <?php
                         include 'helper/config.php';
-                        $limit = 3;
-                        $page = $_GET['page'];
+                        $limit = 5;
+                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
                         $offset = ($page - 1) * $limit;
                         // SQL Query Enter for Table Data
                         $sql = "SELECT * FROM category ORDER BY category.category_id ASC LIMIT {$offset},{$limit}";

@@ -6,7 +6,7 @@ include 'helper/config.php';
 $id = $_GET['id'];
 $sql = "DELETE FROM `category` WHERE `category`.`category_id` = {$id}";
 if (mysqli_query($conn, $sql)) {
-    header('Location: ' . $hostname . 'admin/category.php?page=1');
+    header('Location: ' . $hostname . 'admin/category.php');
 } else {
     echo "<p class='text-center text-danger'>Can't not delete Category.</p>";
 }

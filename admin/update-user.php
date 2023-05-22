@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
                 `role` = '{$role}'
                 WHERE `user`.`user_id` = {$uid}";
     if (mysqli_query($conn, $sql_1)) {
-        header('Location: ' . $hostname . 'admin/users.php?page=1');
+        header('Location: ' . $hostname . 'admin/users.php');
         mysqli_close($conn);
     } else {
         echo 'Query Unsuccessful.';
@@ -35,7 +35,6 @@ if (isset($_POST['submit'])) {
                 <!-- Form Start -->
                 <?php
                 $id = $_GET['id'];
-                include 'helper/config.php';
                 // SQL Query Enter for Table Data
                 $sql = "SELECT * FROM user where user_id =  '{$id}'";
                 $result = mysqli_query($conn, $sql) or die('Query Unsuccessful.');

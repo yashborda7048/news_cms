@@ -25,8 +25,8 @@ if ($_SESSION['user_role'] == '0') {
                     <tbody>
                         <?php
                         include 'helper/config.php';
-                        $limit = 3;
-                        $page = $_GET['page'];
+                        $limit = 5;
+                        $page = isset($_GET['page']) ? $_GET['page'] : 1;
                         $offset = ($page - 1) * $limit;
                         // SQL Query Enter for Table Data
                         $sql = "SELECT * FROM user ORDER BY user.user_id ASC LIMIT {$offset},{$limit}";
@@ -38,13 +38,13 @@ if ($_SESSION['user_role'] == '0') {
                                     <td class='id'>
                                         <?php echo $row['user_id'] ?>
                                     </td>
-                                    <td class='id'>
+                                    <td>
                                         <?php echo $row['first_name'] . " " . $row['last_name']; ?>
                                     </td>
-                                    <td class='id'>
+                                    <td>
                                         <?php echo $row['username'] ?>
                                     </td>
-                                    <td class='id'>
+                                    <td>
                                         <?php echo $row['role'] == 1 ? 'Admin' : 'User' ?>
                                     </td>
                                     <td class='edit'><a href='update-user.php?id=<?php echo $row['user_id'] ?>'><i

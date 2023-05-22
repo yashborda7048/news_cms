@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-offset-3 col-md-6">
                 <!-- Form -->
-                <form action="save-post.php" method="POST" enctype="multipart/form-data">
+                <form action="save-add-post.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="post_title">Title</label>
                         <input type="text" name="post_title" class="form-control" autocomplete="off" required>
@@ -20,7 +20,7 @@
                         <label for="category">Category</label>
                         <select name="category" class="form-control">
                             <!-- <option value="" selected> Select Category</option> -->
-                            <option disabled> Select Category</option>
+                            <option selected> Select Category</option>
                             <?php
                             include 'helper/config.php';
                             $sql = "SELECT * FROM category";

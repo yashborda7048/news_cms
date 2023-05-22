@@ -11,7 +11,7 @@ if (isset($_POST['sumbit'])) {
                 category_name = '{$cat_name}'
                 WHERE category.category_id = {$cat_id}";
     if (mysqli_query($conn, $sql_1)) {
-        header('Location: ' . $hostname . 'admin/category.php?page=1');
+        header('Location: ' . $hostname . 'admin/category.php');
     } else {
         echo 'Query Failed.';
     }

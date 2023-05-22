@@ -60,10 +60,10 @@ if (!isset($_SESSION['username'])) {
                         if ($_SESSION['user_role'] == '1') {
                             ?>
                             <li>
-                                <a href="category.php?page=1">Category</a>
+                                <a href="category.php">Category</a>
                             </li>
                             <li>
-                                <a href="users.php?page=1">Users</a>
+                                <a href="users.php">Users</a>
                             </li>
                         <?php } ?>
 
