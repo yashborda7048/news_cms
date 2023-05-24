@@ -37,14 +37,24 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class='menu'>
-                        <?php
+                        <?php 
                         include 'helper/config.php';
+                        $cat_id = isset($_GET['category-id']) ? $_GET['category-id'] : '';
+                        $home_active = ($cat_id == '') ? 'active' : '' ;
+                        echo "<li>
+                                <a class='{$home_active}' href='{$hostname}'> Home </a>
+                            </li>";
                         $sql = "SELECT * FROM category";
                         $result = mysqli_query($conn, $sql) or die('Query Failed.');
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                <li><a href='category.php?category=<?php echo $row['category_id'] ?>'><?php echo $row['category_name'] ?></a></li>
+                                $active = ($row['category_id'] == $cat_id) ? 'active' : ''; ?>
+                                <li>
+                                    <a class='<?php echo $active; ?>'
+                                        href='category.php?category-id=<?php echo $row['category_id'] ?>'>
+                                        <?php echo $row['category_name'] ?>
+                                    </a>
+                                </li>
                             <?php }
                         } ?>
                     </ul>

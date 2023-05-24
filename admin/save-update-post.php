@@ -2,7 +2,7 @@
 include 'helper/config.php';
 
 if (empty($_FILES['new-image']['name'])) {
-    $img = $_POST['old-image'];
+    $file_name = $_POST['old-image'];
 } else {
     $errors = array();
 

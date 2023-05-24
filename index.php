@@ -11,9 +11,10 @@
                     $page = isset($_GET['page']) ? $_GET['page'] : 1;
                     $offset = ($page - 1) * $limit;
                     // SQL Query Enter for Table Data
-                        $sql = "SELECT
+                    $sql = "SELECT
                         post.post_id,
                         post.title,
+                        post.category,
                         post.description,
                         post.post_date,
                         post.post_img	,
@@ -36,14 +37,14 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="inner-content clearfix">
-                                            <h3><a href='single.php?id=<?php echo $row['post_id'] ?>'>
+                                            <h3><a style='text-transform: capitalize;' href='single.php?id=<?php echo $row['post_id'] ?>'>
                                                     <?php echo $row['title'] ?>
                                                 </a>
                                             </h3>
                                             <div class="post-information">
                                                 <span>
                                                     <i class="fa fa-tags" aria-hidden="true"></i>
-                                                    <a href='category.php?id=<?php echo $row['category_name'] ?>'>
+                                                    <a href='category.php?category-id=<?php echo $row['category'] ?>'>
                                                         <?php echo $row['category_name'] ?>
                                                     </a>
                                                 </span>
