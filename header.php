@@ -1,3 +1,51 @@
+<?php
+include 'helper/config.php';
+$file_name = basename($_SERVER['PHP_SELF']);
+
+switch ($file_name) {
+    case 'single.php':
+        if (isset($_GET['id'])) {
+            $sql_title = "SELECT * FROM post WHERE post_id = {$_GET['id']}";
+            $result_title = mysqli_query($conn, $sql_title) or die('Query Unsuccessful.');
+            $row_title = mysqli_fetch_assoc($result_title);
+            $heading_title = " | " . $row_title['title'];
+        } else {
+            $heading_title = ' | No Post Found.';
+        }
+        break;
+    case 'category.php':
+        if (isset($_GET['category-id'])) {
+            $sql_title = "SELECT * FROM category WHERE category_id = {$_GET['category-id']}";
+            $result_title = mysqli_query($conn, $sql_title) or die('Query Unsuccessful.');
+            $row_title = mysqli_fetch_assoc($result_title);
+            $heading_title = " | " . $row_title['category_name'];
+        } else {
+            $heading_title = ' | No Post Found.';
+        }
+        break;
+    case 'author.php':
+        if (isset($_GET['author-id'])) {
+            $sql_title = "SELECT * FROM user WHERE user_id = {$_GET['author-id']}";
+            $result_title = mysqli_query($conn, $sql_title) or die('Query Unsuccessful.');
+            $row_title = mysqli_fetch_assoc($result_title);
+            $heading_title = " | " . $row_title['username'];
+        } else {
+            $heading_title = ' | No Post Found.';
+        }
+        break;
+    case 'search.php':
+        if (isset($_GET['search'])) {
+            $heading_title = " | " . $_GET['search'];
+        } else {
+            $heading_title = ' | No Post Found.';
+        }
+        break;
+    default:
+        $heading_title = '';
+        break;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +54,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>News</title>
+    <title>News Site
+        <?php echo $heading_title ?>
+    </title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- Font Awesome Icon -->
@@ -37,10 +87,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class='menu'>
-                        <?php 
+                        <?php
                         include 'helper/config.php';
                         $cat_id = isset($_GET['category-id']) ? $_GET['category-id'] : '';
-                        $home_active = ($cat_id == '') ? 'active' : '' ;
+                        $home_active = ($cat_id == '') ? 'active' : '';
                         echo "<li>
                                 <a class='{$home_active}' href='{$hostname}'> Home </a>
                             </li>";

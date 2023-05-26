@@ -9,11 +9,14 @@
                     include 'helper/config.php';
                     $post_id = $_GET['id'];
                     // SQL Query Enter for Table Data
-                    $sql = "SELECT   post.post_id,
+                    $sql = "SELECT   
+                            post.post_id,
                             post.title,
+                            post.category,
                             post.description,
                             post.post_date,
-                            post.post_img	,
+                            post.post_img,
+                            post.author,
                             category.category_name,
                             user.username
                             FROM post
@@ -31,11 +34,13 @@
                                 <div class="post-information">
                                     <span>
                                         <i class="fa fa-tags" aria-hidden="true"></i>
-                                        <?php echo $row['category_name'] ?>
+                                        <a href='category.php?category-id=<?php echo $row['category'] ?>'>
+                                            <?php echo $row['category_name'] ?>
+                                        </a>
                                     </span>
                                     <span>
                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                        <a href='author.php'>
+                                        <a href='author.php?author-id=<?php echo $row['author'] ?>'>
                                             <?php echo $row['username'] ?>
                                         </a>
                                     </span>

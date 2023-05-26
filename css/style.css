@@ -247,7 +247,7 @@ form {
 #main-content .post-content .post-img {
   border: 3px solid #e7e7e7;
   display: block;
-  height: 145px;
+  height: 125px;
   overflow: hidden;
   transition: border 0.3s;
 }

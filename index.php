@@ -17,7 +17,8 @@
                         post.category,
                         post.description,
                         post.post_date,
-                        post.post_img	,
+                        post.post_img,
+                        post.author,
                         category.category_name,
                         user.username
                         FROM post
@@ -50,7 +51,7 @@
                                                 </span>
                                                 <span>
                                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                                    <a href='author.php'>
+                                                    <a href='author.php?author-id=<?php echo $row['author'] ?>'>
                                                         <?php echo $row['username'] ?>
                                                     </a>
                                                 </span>
@@ -60,7 +61,8 @@
                                                 </span>
                                             </div>
                                             <p class="description">
-                                                <?php echo substr($row['description'], 0, 130) . '...' ?>
+                                                <?php $moreText = (strlen($row['description']) > 130) ? '...' : '' ; 
+                                                echo substr($row['description'], 0, 130) . $moreText ?>
                                             </p>
                                             <a class='read-more pull-right'
                                                 href='single.php?id=<?php echo $row['post_id'] ?>'>read more</a>
