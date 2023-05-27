@@ -82,7 +82,8 @@ img.logo {
   transition: all 0.3s;
 }
 
-#admin-menubar .admin-menu li a:hover {
+#admin-menubar .admin-menu li a:hover,
+#admin-menubar .admin-menu li a.active {
   color: #fff;
   background-color: #1e90ff;
 }

@@ -13,7 +13,24 @@ if (isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ADMIN | Login</title>
+    <?php
+    $sql_2 = "SELECT * FROM setting";
+    $result_2 = mysqli_query($conn, $sql_2) or die('Query Unsuccessful.');
+    if (mysqli_num_rows($result_2) > 0) {
+        while ($row_2 = mysqli_fetch_assoc($result_2)) {
+            if (empty($row_2['website_name'])) {
+                $website_name = '';
+            } else {
+                $website_name = $row_2['website_name'];
+            }
+            $favicon = $row_2['logo'];
+        }
+    }
+    ?>
+    <link rel="icon" type="image/x-icon" href="images/<?php echo $favicon ?>">
+    <title>
+        <?php echo $website_name ?> | Admin Login
+    </title>
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="font/font-awesome-4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -24,7 +41,21 @@ if (isset($_SESSION['username'])) {
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
-                    <img class="logo" src="images/news.jpg">
+                <?php
+                    include 'helper/config.php';
+                    // SQL Query Enter for Table Data
+                    $sql_1 = "SELECT * FROM setting";
+                    $result_1 = mysqli_query($conn, $sql_1) or die('Query Unsuccessful.');
+                    if (mysqli_num_rows($result_1) > 0) {
+                        while ($row_1 = mysqli_fetch_assoc($result_1)) {
+                            if (empty($row_1['logo'])) {
+                                echo '<h1>' . $row_1['website_name'] . '</h1>';
+                            } else {
+                                echo '<img src="images/' . $row_1['logo'] . '"' . ' width="400"
+                                height="100" alt=' . $row_1['logo'] . '>';
+                            }
+                        }
+                    } ?>
                     <h3 class="heading">Admin</h3>
                     <!-- Form Start -->
                     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">

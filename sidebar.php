@@ -34,7 +34,7 @@
             while ($row = mysqli_fetch_assoc($result)) {
                 ?>
                 <div class="recent-post">
-                    <a class="post-img" href="">
+                    <a class="post-img" href="single.php?id=<?php echo $row['post_id'] ?>">
                         <img src="admin/upload/<?php echo $row['post_img'] ?>" height="70px" width="100px"
                             alt="<?php echo $row['post_img'] ?>" />
                     </a>

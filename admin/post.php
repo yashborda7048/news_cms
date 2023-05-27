@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <table class="content-table">
                     <thead>
-                        <th>Id</th>
+                        <th>S.NO.</th>
                         <th>Title</th>
                         <th>Category</th>
                         <th>Date</th>
@@ -57,11 +57,12 @@
                             $result = mysqli_query($conn, $sql) or die('Query Unsuccessful.');
                         }
                         if (mysqli_num_rows($result) > 0) {
+                            $serial = $offset + 1;
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
                                     <td class='id'>
-                                        <?php echo $row['post_id'] ?>
+                                        <?php echo $serial ?>
                                     </td>
                                     <td>
                                         <?php echo $row['title'] ?>
@@ -83,13 +84,15 @@
                                         </a>
                                     </td>
                                 </tr>
-                            <?php }
+                                <?php
+                                $serial++;
+                            }
                         } else {
                             echo "<tr>
-                                <td colspan='7' class='text-center'>
-                                <h3>Add Post</h3>
-                                </td> 
-                                </tr>";
+                                    <td colspan='7' class='text-center'>
+                                    <h3>Add Post</h3>
+                                    </td> 
+                                    </tr>";
                         } ?>
                     </tbody>
                 </table>

@@ -54,8 +54,24 @@ switch ($file_name) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>News Site
-        <?php echo $heading_title ?>
+    <?php
+    $sql_2 = "SELECT * FROM setting";
+    $result_2 = mysqli_query($conn, $sql_2) or die('Query Unsuccessful.');
+    if (mysqli_num_rows($result_2) > 0) {
+        while ($row_2 = mysqli_fetch_assoc($result_2)) {
+            if (empty($row_2['website_name'])) {
+                $website_name = '';
+            } else {
+                $website_name = $row_2['website_name'];
+            }
+            $favicon = $row_2['logo'];
+        }
+    }
+    ?>
+    <link rel="icon" type="image/x-icon" href="admin/images/<?php echo $favicon ?>">
+    <title>
+        <?php
+        echo $website_name . $heading_title ?>
     </title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -74,7 +90,21 @@ switch ($file_name) {
             <div class="row">
                 <!-- LOGO -->
                 <div class=" col-md-offset-4 col-md-4">
-                    <a href="index.php" id="logo"><img src="images/news.jpg"></a>
+                    <?php
+                    include 'helper/config.php';
+                    // SQL Query Enter for Table Data
+                    $sql_1 = "SELECT * FROM setting";
+                    $result_1 = mysqli_query($conn, $sql_1) or die('Query Unsuccessful.');
+                    if (mysqli_num_rows($result_1) > 0) {
+                        while ($row_1 = mysqli_fetch_assoc($result_1)) {
+                            if (empty($row_1['logo'])) {
+                                echo '<a href="index.php"> <h1>' . $row_1['website_name'] . '</h1></a>';
+                            } else {
+                                echo '<a href="index.php" id="logo"><img src="admin/images/' . $row_1['logo'] . '"' . ' width="400"
+                                height="100" alt=' . $row_1['logo'] . '></a>';
+                            }
+                        }
+                    } ?>
                 </div>
                 <!-- /LOGO -->
             </div>
