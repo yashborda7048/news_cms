@@ -79,7 +79,6 @@ if (isset($_SESSION['username'])) {
                         $result = mysqli_query($conn, $sql) or die('Query Failed.');
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                session_start();
                                 $_SESSION['username'] = $row['username'];
                                 $_SESSION['first_name'] = $row['first_name'];
                                 $_SESSION['last_name'] = $row['last_name'];
