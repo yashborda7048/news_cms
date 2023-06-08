@@ -60,8 +60,8 @@
                     } else {
                         echo "<div class='text-center'><h3>Add Post</h3></div>";
                     } ?>
-                <!-- /post-container -->
             </div>
+            <!-- /post-container -->
             <?php include 'sidebar.php'; ?>
         </div>
     </div>

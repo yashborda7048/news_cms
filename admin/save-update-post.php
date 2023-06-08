@@ -57,8 +57,6 @@ if ($_POST['category'] == $_POST['old-category']) {
     }
 }
 
-
-
 mysqli_close($conn);
 
 ?>

@@ -66,7 +66,7 @@
                                                 </span>
                                             </div>
                                             <p class="description">
-                                                <?php $moreText = (strlen($row['description']) > 130) ? '...' : '' ; 
+                                                <?php $moreText = (strlen($row['description']) > 130) ? '...' : '';
                                                 echo substr($row['description'], 0, 130) . $moreText ?>
                                             </p>
                                             <a class='read-more pull-right'
@@ -101,7 +101,8 @@
                         }
                         echo "</ul>";
                     } ?>
-                </div><!-- /post-container -->
+                </div>
+                <!-- /post-container -->
             </div>
             <?php include 'sidebar.php'; ?>
         </div>
