@@ -248,15 +248,14 @@ form {
 #main-content .post-content .post-img {
   border: 3px solid #e7e7e7;
   display: block;
-  height: 125px;
+  height: 150px;
   overflow: hidden;
   transition: border 0.3s;
+  max-width: 330px;
+  margin: auto;
 }
 #main-content .post-content .post-img:hover {
   border: 3px solid #1e90ff;
-}
-#main-content .post-content .inner-content {
-  /* border: 1px solid #000; */
 }
 
 #main-content .post-content h3 {
